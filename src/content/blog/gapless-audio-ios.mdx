@@ -1,0 +1,31 @@
+---
+title: "Why does looped audio have that annoying click? A technical dive into gapless audio on iOS"
+description: "The click at the loop point in most ambient-sound apps isn't your imagination — it's a real encoding and playback problem, and here's what it actually takes to fix it."
+pubDate: 2026-08-09
+tags: ["engineering", "ios", "audio"]
+---
+
+If you've ever used a white-noise or rain-sounds app and heard a faint *tick* every 20 or 30 seconds, that's not your imagination, and it's not a bad recording. It's a loop point — the exact moment a track restarts — and getting it to disappear completely turns out to be a real engineering problem, not just a matter of trimming a file in the right place.
+
+## Where the click actually comes from
+
+There are two separate culprits, and most apps only fix one of them.
+
+**Encoder padding.** Compressed audio formats like AAC and MP3 don't encode your file frame-by-frame — they work in fixed-size blocks (1024 samples for AAC, 1152 for MP3). If your source audio doesn't divide evenly into those blocks, the encoder pads the start and end with a few milliseconds of silence to make the math work. That padding is invisible in a waveform editor but very audible as a tiny gap or click when the track loops, because the "seam" now has a few silent samples sitting right at the loop point.
+
+**Playback-level restart.** Even with a perfectly encoded file, *how* you tell the OS to loop it matters. The naive approach — call `play()` again when the track ends — always introduces a gap, because there's real latency between "track finished" and "next `play()` call executes." On iOS specifically, that gap is small but not zero, and on an ambient sound meant to run for eight hours next to your head, "small but not zero" is exactly what you notice.
+
+## What actually fixes it
+
+Two things, used together:
+
+1. **Strip the codec padding at the source.** Trimming to the correct sample count *before* encoding — accounting for the encoder's block size — means there's no silent padding sitting at the seam in the first place.
+2. **Schedule the loop, don't restart it.** Instead of waiting for playback to end and issuing a new `play()` call, the next buffer needs to be scheduled *ahead of time* against the audio hardware's clock — so the transition happens at the sample level, with zero gap, regardless of app-level latency. On iOS this means working with `AVAudioEngine` and scheduling buffers directly, rather than relying on a player's built-in "loop" flag.
+
+Neither of these is visible to a user in the way a UI redesign is. You can't screenshot "there's no click." But it's the difference between a sound that fades into the background of your night and one that keeps quietly interrupting it every 20 seconds — which, for a sleep app, kind of defeats the point.
+
+## Why this is worth caring about
+
+A rain loop with a click every 30 seconds might not consciously wake you up. But sleep is sensitive to exactly this kind of low-grade, repeating interruption — the sound you're using specifically to *stop* noticing your environment ends up doing the opposite. Getting the loop seamless isn't a nice-to-have polish item; it's the actual product.
+
+This is one of the reasons Repose's audio layer is built as a native module rather than leaning entirely on a cross-platform audio library — precise buffer scheduling on iOS needed direct access to `AVAudioEngine` that off-the-shelf React Native audio packages don't expose. More on that decision in a future post.

@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric" });
+---
+
+<Base
+  title="Blog"
+  description="Notes on sleep sounds, audio engineering, and building Repose as a solo indie developer."
+>
+  <section class="mx-auto max-w-3xl px-6 py-20 sm:py-28">
+    <div class="reveal mb-14">
+      <p class="text-sm font-bold uppercase tracking-widest text-repose-muted">Blog</p>
+      <h1 class="mt-3 text-4xl font-black sm:text-5xl">Notes on rest.</h1>
+      <p class="mt-4 text-lg leading-relaxed text-repose-muted">
+        Sleep sounds, audio engineering, and the occasional indie-dev war story.
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-6">
+      {posts.map((post) => (
+        <a
+          href={`/blog/${post.id}`}
+          class="reveal block rounded-2xl border border-repose-border bg-repose-surface p-6 transition hover:-translate-y-1 hover:border-repose-text/30 hover:shadow-xl"
+        >
+          <p class="text-xs font-bold uppercase tracking-widest text-repose-muted">
+            {dateFormatter.format(post.data.pubDate)}
+          </p>
+          <h2 class="mt-2 text-xl font-bold">{post.data.title}</h2>
+          <p class="mt-2 text-sm leading-relaxed text-repose-muted">{post.data.description}</p>
+        </a>
+      ))}
+      {posts.length === 0 && (
+        <p class="text-repose-muted">No posts yet — check back soon.</p>
+      )}
+    </div>
+  </section>
+</Base>

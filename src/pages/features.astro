@@ -1,0 +1,80 @@
+---
+import { Waves, Layers, Timer, Lock, WifiOff } from "@lucide/astro";
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import AppStoreBadges from "../components/AppStoreBadges.astro";
+import sleepTimer from "../assets/screenshots/sleep-timer.jpeg";
+
+const features = [
+  {
+    icon: Waves,
+    title: "Gapless audio",
+    body: "Most looped ambient sound has a tiny click at the seam — encoder padding and playback latency both introduce it. Repose's audio layer schedules loop buffers directly against the audio hardware clock, so the loop point disappears entirely instead of quietly interrupting you every 20-30 seconds.",
+  },
+  {
+    icon: Layers,
+    title: "25 ambient sounds",
+    body: "Ocean, rain, forest, wind, and more, organized into categories rather than one long undifferentiated list. Two sounds are free to try; the rest unlock with a subscription. Layer multiple sounds together and adjust each one's volume independently to build the exact environment that works for you.",
+  },
+  {
+    icon: Timer,
+    title: "Sleep timer",
+    body: "Set a timer — 15, 30, 60, or 90 minutes — and audio fades out smoothly on schedule rather than cutting off abruptly. No need to remember to turn anything off before you fall asleep.",
+  },
+  {
+    icon: Lock,
+    title: "Lock-screen widget",
+    body: "Once a sound is playing, control it from your lock screen or Control Center — no need to unlock your phone in the middle of the night to check what's playing or turn it off. Now Playing artwork reflects whichever sound category you've selected.",
+  },
+  {
+    icon: WifiOff,
+    title: "Offline playback",
+    body: "Download a sound once and it plays with no connection needed afterward — no buffering, no mid-loop interruptions if your connection drops overnight, and no data usage while you sleep.",
+  },
+];
+---
+
+<Base
+  title="Features"
+  description="A closer look at gapless audio, 25 ambient sounds, the sleep timer, lock-screen widget, and offline playback in Repose."
+>
+  <section class="mx-auto max-w-4xl px-6 py-20 sm:py-28">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <p class="text-sm font-bold uppercase tracking-widest text-repose-muted">Features</p>
+      <h1 class="mt-3 text-4xl font-black sm:text-5xl">Built for a quiet night.</h1>
+      <p class="mt-4 text-lg leading-relaxed text-repose-muted">
+        Every feature exists to remove one more thing that could interrupt your sleep.
+      </p>
+    </div>
+
+    <div class="mt-16 flex flex-col gap-14">
+      {features.map(({ icon: Icon, title, body }, i) => (
+        <div class="reveal flex flex-col items-start gap-5 sm:flex-row sm:items-start sm:gap-8">
+          <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-repose-border bg-repose-surface">
+            <Icon class="h-7 w-7 text-repose-text" />
+          </div>
+          <div>
+            <h2 class="text-xl font-bold">{title}</h2>
+            <p class="mt-2 leading-relaxed text-repose-muted">{body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="reveal mt-20 flex flex-col items-center gap-8 border-t border-repose-border pt-16 text-center">
+      <Image
+        src={sleepTimer}
+        alt="Repose app's sleep timer, with 15, 30, 60, and 90 minute presets"
+        width={220}
+        format="webp"
+        quality={65}
+        class="w-full max-w-[220px] rounded-[2rem] border border-repose-border"
+      />
+      <div>
+        <h2 class="text-2xl font-black sm:text-3xl">Try it tonight</h2>
+        <p class="mt-3 max-w-md text-repose-muted">Two sounds are free, no account required.</p>
+      </div>
+      <AppStoreBadges />
+    </div>
+  </section>
+</Base>

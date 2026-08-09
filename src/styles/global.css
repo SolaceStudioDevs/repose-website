@@ -72,3 +72,55 @@ header {
 header.header-hidden {
   transform: translateY(-100%);
 }
+
+/* ---------- BLOG / MDX TYPOGRAPHY ---------- */
+.prose-repose {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--repose-muted);
+}
+.prose-repose > * + * {
+  margin-top: 1.5em;
+}
+.prose-repose h2 {
+  margin-top: 2.2em;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--repose-text);
+}
+.prose-repose h3 {
+  margin-top: 1.8em;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--repose-text);
+}
+.prose-repose a {
+  color: var(--repose-text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose-repose ul,
+.prose-repose ol {
+  padding-left: 1.4em;
+}
+.prose-repose ul {
+  list-style: disc;
+}
+.prose-repose ol {
+  list-style: decimal;
+}
+.prose-repose li + li {
+  margin-top: 0.5em;
+}
+.prose-repose code {
+  background: var(--repose-surface);
+  border: 1px solid var(--repose-border);
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+  font-size: 0.9em;
+}
+.prose-repose blockquote {
+  border-left: 3px solid var(--repose-border);
+  padding-left: 1.2em;
+  font-style: italic;
+}

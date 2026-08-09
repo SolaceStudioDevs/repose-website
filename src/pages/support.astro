@@ -1,0 +1,74 @@
+---
+import Base from "../layouts/Base.astro";
+
+const faqs = [
+  {
+    q: "How do I cancel my subscription?",
+    a: "Subscriptions are managed through Apple, not through Repose directly. On your iPhone, open Settings → [your name] → Subscriptions → Repose, then tap Cancel Subscription. You'll keep access until the end of your current billing period.",
+  },
+  {
+    q: "What's free, and what requires a subscription?",
+    a: "Two ambient sounds are free to use with no account or subscription required. The remaining sounds unlock with a subscription ($0.99/month or $9.99/year).",
+  },
+  {
+    q: "Does Repose work without an internet connection?",
+    a: "Yes — once a sound is downloaded, it plays fully offline. Nothing needs to buffer or reconnect overnight.",
+  },
+  {
+    q: "Why doesn't the lock-screen widget show up?",
+    a: "The Now Playing widget appears on the lock screen and in Control Center once a sound starts playing. If it's not showing up, try force-closing and reopening the app, and make sure the sound is actually playing (not just selected).",
+  },
+  {
+    q: "Is Repose available on Android?",
+    a: "An Android version is currently in closed testing and not yet publicly available. If you'd like to be notified when it launches, reach out at the email below.",
+  },
+  {
+    q: "Does Repose diagnose or treat any medical condition?",
+    a: "No. Repose is an ambient sound app that may help you relax or wind down — it isn't a medical device and doesn't diagnose, treat, or cure any condition, including tinnitus or insomnia. If you have ongoing sleep or health concerns, please talk to a doctor.",
+  },
+  {
+    q: "What data does Repose collect?",
+    a: "See the full breakdown on the Privacy Policy page — in short, Repose collects minimal usage data and does not sell personal information.",
+  },
+];
+---
+
+<Base
+  title="Support"
+  description="Frequently asked questions about Repose, including how to cancel your subscription, plus how to get in touch."
+>
+  <section class="mx-auto max-w-3xl px-6 py-20 sm:py-28">
+    <div class="reveal mb-14">
+      <p class="text-sm font-bold uppercase tracking-widest text-repose-muted">Support</p>
+      <h1 class="mt-3 text-4xl font-black sm:text-5xl">Questions, answered.</h1>
+      <p class="mt-4 text-lg leading-relaxed text-repose-muted">
+        Can't find what you need here? Email directly and you'll hear back from an actual person.
+      </p>
+    </div>
+
+    <div class="reveal flex flex-col gap-3">
+      {faqs.map(({ q, a }) => (
+        <details class="group rounded-2xl border border-repose-border bg-repose-surface p-5 open:pb-5">
+          <summary class="cursor-pointer list-none font-bold marker:content-none">
+            <span class="flex items-center justify-between gap-4">
+              {q}
+              <span class="shrink-0 text-repose-muted transition group-open:rotate-45">+</span>
+            </span>
+          </summary>
+          <p class="mt-3 leading-relaxed text-repose-muted">{a}</p>
+        </details>
+      ))}
+    </div>
+
+    <div class="reveal mt-16 rounded-2xl border border-repose-border bg-repose-surface p-8 text-center">
+      <h2 class="text-xl font-bold">Still stuck?</h2>
+      <p class="mt-2 text-repose-muted">Email support directly and you'll hear back soon.</p>
+      <a
+        href="mailto:SolaceStudioDevs@protonmail.com"
+        class="mt-5 inline-block rounded-full bg-repose-text px-6 py-3 text-sm font-bold text-repose-bg transition hover:opacity-90"
+      >
+        SolaceStudioDevs@protonmail.com
+      </a>
+    </div>
+  </section>
+</Base>
