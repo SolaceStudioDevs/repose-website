@@ -1,0 +1,38 @@
+---
+import { Image } from "astro:assets";
+import ocean from "../assets/images/OceanBackground.jpg";
+import AppStoreBadges from "./AppStoreBadges.astro";
+---
+
+<section class="relative overflow-hidden" id="download">
+  <Image
+    src={ocean}
+    alt=""
+    role="presentation"
+    width={1200}
+    widths={[480, 800, 1200]}
+    sizes="100vw"
+    format="webp"
+    quality={55}
+    class="absolute inset-0 h-full w-full object-cover"
+  />
+  <div class="absolute inset-0 bg-gradient-to-b from-[#1a1a2e]/80 via-[#1a1a2e]/85 to-repose-bg"></div>
+
+  <div class="relative mx-auto max-w-4xl px-6 py-28 text-center sm:py-36">
+    <p class="mb-4 text-sm font-bold uppercase tracking-widest text-white/60">
+      Repose &middot; Sleep Sounds
+    </p>
+    <h1 class="text-4xl font-black leading-tight text-white sm:text-6xl">
+      Rest, on your terms.
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
+      Layer gapless ambient sound — ocean, rain, forest, and more — into a
+      night that stays quiet, steady, and yours. No clicks, no seams, no
+      subscription required to fall asleep.
+    </p>
+
+    <div class="mt-10 flex justify-center">
+      <AppStoreBadges />
+    </div>
+  </div>
+</section>

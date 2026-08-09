@@ -1,0 +1,92 @@
+---
+import { Moon, Sun, Menu, X } from "@lucide/astro";
+import { Image } from "astro:assets";
+import icon from "../assets/images/icon.png";
+
+const navLinks = [
+  { label: "Features", href: "/features" },
+  { label: "Blog", href: "/blog" },
+  { label: "Support", href: "/support" },
+  { label: "About", href: "/about" },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-repose-border bg-repose-bg/90 backdrop-blur">
+  <div class="mx-auto flex h-18 max-w-6xl items-center justify-between px-6 py-4">
+    <a href="/" class="flex items-center gap-2 font-black text-lg">
+      <Image src={icon} alt="Repose" width={32} height={32} class="rounded-lg" />
+      Repose
+    </a>
+
+    <nav class="hidden items-center gap-8 text-sm font-semibold text-repose-muted md:flex">
+      {navLinks.map((link) => (
+        <a href={link.href} class="transition hover:text-repose-text">{link.label}</a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Toggle dark and light mode"
+        class="rounded-full border border-repose-border p-2 text-repose-text transition hover:border-repose-muted"
+      >
+        <Sun class="hidden h-5 w-5 dark:block" />
+        <Moon class="block h-5 w-5 dark:hidden" />
+      </button>
+
+      <a
+        href="#download"
+        class="hidden rounded-full bg-repose-text px-5 py-2 text-sm font-bold text-repose-bg transition hover:opacity-90 sm:inline-block"
+      >
+        Get the App
+      </a>
+
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        class="rounded-full border border-repose-border p-2 text-repose-text md:hidden"
+      >
+        <Menu id="menu-icon-open" class="h-5 w-5" />
+        <X id="menu-icon-close" class="hidden h-5 w-5" />
+      </button>
+    </div>
+  </div>
+
+  <nav
+    id="mobile-menu"
+    class="hidden flex-col gap-1 border-t border-repose-border px-6 py-4 md:hidden"
+  >
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class="rounded-lg px-3 py-2 text-sm font-semibold text-repose-muted transition hover:bg-repose-surface hover:text-repose-text"
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+</header>
+
+<script is:inline>
+  (function () {
+    const toggle = document.getElementById("theme-toggle");
+    toggle?.addEventListener("click", () => {
+      const isDark = document.documentElement.classList.toggle("dark");
+      localStorage.setItem("repose-theme", isDark ? "dark" : "light");
+    });
+
+    const menuToggle = document.getElementById("mobile-menu-toggle");
+    const menu = document.getElementById("mobile-menu");
+    const iconOpen = document.getElementById("menu-icon-open");
+    const iconClose = document.getElementById("menu-icon-close");
+    menuToggle?.addEventListener("click", () => {
+      const isOpen = menu?.classList.toggle("hidden") === false;
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      iconOpen?.classList.toggle("hidden", isOpen);
+      iconClose?.classList.toggle("hidden", !isOpen);
+    });
+  })();
+</script>

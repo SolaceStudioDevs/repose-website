@@ -1,0 +1,25 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-repose-border">
+  <div class="mx-auto max-w-6xl px-6 py-10 text-sm text-repose-muted">
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+      <p>&copy; {year} Solace Studios. All rights reserved.</p>
+
+      <nav class="flex flex-wrap gap-x-6 gap-y-2">
+        <a href="/privacy" class="transition hover:text-repose-text">Privacy</a>
+        <a href="/terms" class="transition hover:text-repose-text">Terms</a>
+        <a href="/support" class="transition hover:text-repose-text">Support</a>
+        <a
+          href="mailto:SolaceStudioDevs@protonmail.com"
+          class="transition hover:text-repose-text"
+        >
+          SolaceStudioDevs@protonmail.com
+        </a>
+      </nav>
+    </div>
+
+    <p class="mt-6 text-xs">Made with 🌙 by a solo indie dev.</p>
+  </div>
+</footer>

@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/* Class-based dark mode (Tailwind v4 default is media-query based) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Repose brand tokens, pulled from app/(tabs)/index.tsx darkTheme/lightTheme.
+   Light values are defaults; .dark overrides them. <html> gets the "dark"
+   class by default (see the inline script in Base.astro) since the app's
+   default experience is dark / night-oriented. */
+:root {
+  --repose-bg: #f5f5f5;
+  --repose-surface: #ffffff;
+  --repose-border: #dddddd;
+  --repose-text: #1a1a2e;
+  --repose-muted: #555555;
+}
+
+.dark {
+  --repose-bg: #1a1a2e;
+  --repose-surface: #16213e;
+  --repose-border: #0f3460;
+  --repose-text: #ffffff;
+  --repose-muted: #aaaaaa;
+}
+
+@theme inline {
+  --color-repose-bg: var(--repose-bg);
+  --color-repose-surface: var(--repose-surface);
+  --color-repose-border: var(--repose-border);
+  --color-repose-text: var(--repose-text);
+  --color-repose-muted: var(--repose-muted);
+
+  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--repose-bg);
+  color: var(--repose-text);
+  font-family: var(--font-sans);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}

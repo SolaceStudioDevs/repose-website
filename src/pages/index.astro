@@ -1,0 +1,54 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import FeatureGrid from "../components/FeatureGrid.astro";
+---
+
+<Base
+  title="Repose: Sleep Sounds"
+  description="Gapless ambient sound for sleep, relaxation, and tinnitus relief. 25 sounds, offline playback, and a lock-screen widget — rest, on your terms."
+>
+  <Hero />
+  <FeatureGrid />
+
+  <!--
+    Real screenshots are deferred — need a fresh post-Phase-6 capture with
+    lock-screen artwork + updated purchase modal visible (see
+    website_handoff.md outstanding list). Placeholder frames only, no
+    fabricated screenshots.
+  -->
+  <section class="mx-auto max-w-6xl px-6 py-20 sm:py-28">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="text-3xl font-black sm:text-4xl">See it in your hand</h2>
+      <p class="mt-4 text-lg leading-relaxed text-repose-muted">
+        Screenshots are on the way — the app is putting the finishing touches on.
+      </p>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-3">
+      {[0, 1, 2].map((i) => (
+        <div class="mx-auto flex aspect-[9/19.5] w-full max-w-[220px] items-center justify-center rounded-[2rem] border border-repose-border bg-repose-surface">
+          <span class="px-6 text-center text-sm text-repose-muted">Screenshot coming soon</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="border-t border-repose-border">
+    <div class="mx-auto max-w-3xl px-6 py-20 text-center sm:py-28">
+      <h2 class="text-3xl font-black sm:text-4xl">A calmer way to fall asleep</h2>
+      <p class="mt-4 text-lg leading-relaxed text-repose-muted">
+        No accounts to manage, no noisy feed to scroll past. Open Repose, pick a
+        sound, and let the night take it from there.
+      </p>
+      <div class="mt-10 flex justify-center">
+        <a
+          href="#download"
+          class="inline-block rounded-full bg-repose-text px-8 py-3 text-sm font-bold text-repose-bg transition hover:opacity-90"
+        >
+          Get the app
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

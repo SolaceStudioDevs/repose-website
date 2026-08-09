@@ -1,0 +1,50 @@
+---
+import { Waves, Layers, Timer, Lock, WifiOff } from "@lucide/astro";
+
+const features = [
+  {
+    icon: Waves,
+    title: "Gapless audio",
+    body: "No clicks, no seams. Every loop is engineered to disappear into the next, so nothing pulls you out of rest.",
+  },
+  {
+    icon: Layers,
+    title: "25 ambient sounds",
+    body: "Ocean, rain, forest, and more — layer them together into the environment that helps you settle in.",
+  },
+  {
+    icon: Timer,
+    title: "Sleep timer",
+    body: "Set it and let go. Audio fades out on your schedule, not before.",
+  },
+  {
+    icon: Lock,
+    title: "Lock-screen widget",
+    body: "See what's playing without unlocking your phone — control it from the lock screen or Control Center.",
+  },
+  {
+    icon: WifiOff,
+    title: "Offline playback",
+    body: "Once a sound is downloaded, it plays with no connection needed — no buffering, no interruptions.",
+  },
+];
+---
+
+<section class="mx-auto max-w-6xl px-6 py-20 sm:py-28" id="features">
+  <div class="mx-auto max-w-2xl text-center">
+    <h2 class="text-3xl font-black sm:text-4xl">Built for a quiet night</h2>
+    <p class="mt-4 text-lg leading-relaxed text-repose-muted">
+      Every detail — down to the loop points — is tuned so nothing interrupts you.
+    </p>
+  </div>
+
+  <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {features.map(({ icon: Icon, title, body }) => (
+      <div class="rounded-2xl border border-repose-border bg-repose-surface p-6">
+        <Icon class="h-8 w-8 text-repose-text" />
+        <h3 class="mt-4 text-lg font-bold">{title}</h3>
+        <p class="mt-2 text-sm leading-relaxed text-repose-muted">{body}</p>
+      </div>
+    ))}
+  </div>
+</section>
