@@ -1,7 +1,20 @@
 ---
+import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import Hero from "../components/Hero.astro";
 import FeatureGrid from "../components/FeatureGrid.astro";
+import rainyNight from "../assets/screenshots/rainy-night.jpeg";
+import oceanBreeze from "../assets/screenshots/ocean-breeze.jpeg";
+import sleepTimer from "../assets/screenshots/sleep-timer.jpeg";
+
+// These predate the Phase 6 polish pass (no lock-screen artwork or the
+// updated purchase modal visible) — real captures, just not the "fresh"
+// ones website_handoff.md calls for. Fine for v1, swap when new ones land.
+const screenshots = [
+  { src: rainyNight, alt: "Repose app showing the Rainy Night sound category with layered rain and storm sounds" },
+  { src: oceanBreeze, alt: "Repose app showing the Ocean Breeze sound category with wave and wind sounds" },
+  { src: sleepTimer, alt: "Repose app's sleep timer, with 15, 30, 60, and 90 minute presets" },
+];
 ---
 
 <Base
@@ -11,31 +24,25 @@ import FeatureGrid from "../components/FeatureGrid.astro";
   <Hero />
   <FeatureGrid />
 
-  <!--
-    Real screenshots are deferred — need a fresh post-Phase-6 capture with
-    lock-screen artwork + updated purchase modal visible (see
-    website_handoff.md outstanding list). Placeholder frames only, no
-    fabricated screenshots.
-  -->
   <section class="mx-auto max-w-6xl px-6 py-20 sm:py-28">
-    <div class="mx-auto max-w-2xl text-center">
+    <div class="reveal mx-auto max-w-2xl text-center">
       <h2 class="text-3xl font-black sm:text-4xl">See it in your hand</h2>
       <p class="mt-4 text-lg leading-relaxed text-repose-muted">
-        Screenshots are on the way — the app is putting the finishing touches on.
+        A closer look at the sounds, categories, and sleep timer.
       </p>
     </div>
 
-    <div class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-3">
-      {[0, 1, 2].map((i) => (
-        <div class="mx-auto flex aspect-[9/19.5] w-full max-w-[220px] items-center justify-center rounded-[2rem] border border-repose-border bg-repose-surface">
-          <span class="px-6 text-center text-sm text-repose-muted">Screenshot coming soon</span>
+    <div class="screenshot-grid mt-14 grid grid-cols-1 gap-6 sm:grid-cols-3">
+      {screenshots.map(({ src, alt }) => (
+        <div class="reveal mx-auto w-full max-w-[220px] overflow-hidden rounded-[2rem] border border-repose-border bg-repose-surface transition hover:-translate-y-1 hover:border-repose-text/30 hover:shadow-xl">
+          <Image src={src} alt={alt} width={440} format="webp" quality={65} class="w-full" />
         </div>
       ))}
     </div>
   </section>
 
   <section class="border-t border-repose-border">
-    <div class="mx-auto max-w-3xl px-6 py-20 text-center sm:py-28">
+    <div class="reveal mx-auto max-w-3xl px-6 py-20 text-center sm:py-28">
       <h2 class="text-3xl font-black sm:text-4xl">A calmer way to fall asleep</h2>
       <p class="mt-4 text-lg leading-relaxed text-repose-muted">
         No accounts to manage, no noisy feed to scroll past. Open Repose, pick a

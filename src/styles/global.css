@@ -39,3 +39,36 @@ body {
   font-family: var(--font-sans);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
+
+/* ---------- SCROLL REVEAL ---------- */
+/* Gated on html.js so all content is visible with no JS */
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 0.8, 0.3, 1), transform 0.7s cubic-bezier(0.16, 0.8, 0.3, 1);
+}
+html.js .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Stagger siblings within a grid so they cascade in rather than pop together */
+html.js .feature-grid .reveal:nth-child(2) { transition-delay: 0.08s; }
+html.js .feature-grid .reveal:nth-child(3) { transition-delay: 0.16s; }
+html.js .feature-grid .reveal:nth-child(4) { transition-delay: 0.24s; }
+html.js .feature-grid .reveal:nth-child(5) { transition-delay: 0.32s; }
+html.js .screenshot-grid .reveal:nth-child(2) { transition-delay: 0.08s; }
+html.js .screenshot-grid .reveal:nth-child(3) { transition-delay: 0.16s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- HIDE-ON-SCROLL HEADER ---------- */
+header {
+  transition: transform 0.35s ease;
+}
+header.header-hidden {
+  transform: translateY(-100%);
+}
