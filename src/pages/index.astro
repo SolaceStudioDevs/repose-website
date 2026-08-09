@@ -5,6 +5,8 @@ import Hero from "../components/Hero.astro";
 import FeatureGrid from "../components/FeatureGrid.astro";
 import rainyNight from "../assets/screenshots/rainy-night.jpeg";
 import oceanBreeze from "../assets/screenshots/ocean-breeze.jpeg";
+import deepForest from "../assets/screenshots/deep-forest.jpeg";
+import winterSolitude from "../assets/screenshots/winter-solitude.jpeg";
 import sleepTimer from "../assets/screenshots/sleep-timer.jpeg";
 
 // These predate the Phase 6 polish pass (no lock-screen artwork or the
@@ -13,6 +15,8 @@ import sleepTimer from "../assets/screenshots/sleep-timer.jpeg";
 const screenshots = [
   { src: rainyNight, alt: "Repose app showing the Rainy Night sound category with layered rain and storm sounds" },
   { src: oceanBreeze, alt: "Repose app showing the Ocean Breeze sound category with wave and wind sounds" },
+  { src: deepForest, alt: "Repose app showing the Deep Forest sound category with frogs, campfire, and birdsong" },
+  { src: winterSolitude, alt: "Repose app showing the Winter Solitude sound category with wind and a frozen lakeside" },
   { src: sleepTimer, alt: "Repose app's sleep timer, with 15, 30, 60, and 90 minute presets" },
 ];
 ---
@@ -32,9 +36,9 @@ const screenshots = [
       </p>
     </div>
 
-    <div class="screenshot-grid mt-14 grid grid-cols-1 gap-6 sm:grid-cols-3">
+    <div class="screenshot-grid mt-14 flex flex-wrap justify-center gap-6">
       {screenshots.map(({ src, alt }) => (
-        <div class="reveal mx-auto w-full max-w-[220px] overflow-hidden rounded-[2rem] border border-repose-border bg-repose-surface transition hover:-translate-y-1 hover:border-repose-text/30 hover:shadow-xl">
+        <div class="reveal w-full max-w-[220px] flex-1 basis-[160px] overflow-hidden rounded-[2rem] border border-repose-border bg-repose-surface transition hover:-translate-y-1 hover:border-repose-text/30 hover:shadow-xl">
           <Image src={src} alt={alt} width={440} format="webp" quality={65} class="w-full" />
         </div>
       ))}

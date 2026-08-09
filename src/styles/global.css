@@ -58,6 +58,8 @@ html.js .feature-grid .reveal:nth-child(4) { transition-delay: 0.24s; }
 html.js .feature-grid .reveal:nth-child(5) { transition-delay: 0.32s; }
 html.js .screenshot-grid .reveal:nth-child(2) { transition-delay: 0.08s; }
 html.js .screenshot-grid .reveal:nth-child(3) { transition-delay: 0.16s; }
+html.js .screenshot-grid .reveal:nth-child(4) { transition-delay: 0.24s; }
+html.js .screenshot-grid .reveal:nth-child(5) { transition-delay: 0.32s; }
 
 @media (prefers-reduced-motion: reduce) {
   html.js .reveal {
