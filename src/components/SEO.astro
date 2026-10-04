@@ -5,8 +5,9 @@ interface Props {
   image?: string;
 }
 
-// /og-image.png doesn't exist yet — outstanding per website_handoff.md, add before launch
-const { title, description, image = "/og-image.png" } = Astro.props;
+// The link preview shown when a page is shared (1200x630): the ocean photo, the app icon,
+// "Rest, on your terms." and two app screenshots. Pages can pass their own.
+const { title, description, image = "/og-image.jpg" } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? "https://reposesleep.net");
 const siteName = "Repose: Sleep Sounds";
 const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
@@ -21,6 +22,9 @@ const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:image" content={new URL(image, Astro.site ?? "https://reposesleep.net")} />
+{image === "/og-image.jpg" && <meta property="og:image:width" content="1200" />}
+{image === "/og-image.jpg" && <meta property="og:image:height" content="630" />}
+<meta property="og:image:alt" content="Repose: Sleep Sounds. Rest, on your terms." />
 <meta property="og:site_name" content={siteName} />
 
 <meta name="twitter:card" content="summary_large_image" />
