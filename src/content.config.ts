@@ -6,6 +6,9 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    // Shorter versions for search results, when the headline or summary is long.
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
     pubDate: z.coerce.date(),
     tags: z.array(z.string()).default([]),
   }),

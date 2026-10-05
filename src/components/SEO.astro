@@ -3,14 +3,22 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  jsonLd?: object | object[];
 }
 
 // The link preview shown when a page is shared (1200x630): the ocean photo, the app icon,
 // "Rest, on your terms." and two app screenshots. Pages can pass their own.
-const { title, description, image = "/og-image.jpg" } = Astro.props;
+const { title, description, image = "/og-image.jpg", jsonLd } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? "https://reposesleep.net");
 const siteName = "Repose: Sleep Sounds";
-const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
+// The site name is added to the end unless the title already names Repose, or
+// the result would be longer than the ~60 characters Google shows.
+const suffixed = `${title} — ${siteName}`;
+const fullTitle = title.includes("Repose") || suffixed.length > 60 ? title : suffixed;
+const ldItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const ldJson = ldItems.length
+  ? JSON.stringify({ "@context": "https://schema.org", "@graph": ldItems }).replace(/</g, "\u003c")
+  : "";
 ---
 
 <title>{fullTitle}</title>
@@ -31,3 +39,4 @@ const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL(image, Astro.site ?? "https://reposesleep.net")} />
+{ldJson && <script type="application/ld+json" set:html={ldJson} />}

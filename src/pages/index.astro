@@ -19,10 +19,30 @@ const screenshots = [
   { src: winterSolitude, alt: "Repose app showing the Winter Solitude sound category with wind and a frozen lakeside" },
   { src: sleepTimer, alt: "Repose app's sleep timer, with 15, 30, 60, and 90 minute presets" },
 ];
+
+const site = "https://reposesleep.net";
+const structuredData = [
+  {
+    "@type": "MobileApplication",
+    "@id": `${site}/#app`,
+    name: "Repose: Sleep Sounds",
+    operatingSystem: "iOS",
+    applicationCategory: "HealthApplication",
+    description: "Gapless ambient sound for sleep, relaxation, and tinnitus relief. 25 sounds, offline playback, and a lock-screen widget.",
+    url: `${site}/`,
+    downloadUrl: "https://apps.apple.com/app/repose-sleep-sounds/id6762325488",
+    image: `${site}/og-image.jpg`,
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    publisher: { "@id": `${site}/#org` },
+  },
+  { "@type": "Organization", "@id": `${site}/#org`, name: "Solace Studios", url: `${site}/`, logo: `${site}/icon-192.png` },
+  { "@type": "WebSite", "@id": `${site}/#website`, name: "Repose: Sleep Sounds", url: `${site}/`, publisher: { "@id": `${site}/#org` } },
+];
 ---
 
 <Base
-  title="Repose: Sleep Sounds"
+  title="Repose: Gapless Sleep Sounds & White Noise for iPhone"
+  jsonLd={structuredData}
   description="Gapless ambient sound for sleep, relaxation, and tinnitus relief. 25 sounds, offline playback, and a lock-screen widget — rest, on your terms."
 >
   <Hero />

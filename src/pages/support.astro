@@ -31,10 +31,19 @@ const faqs = [
     a: "See the full breakdown on the Privacy Policy page — in short, Repose collects minimal usage data and does not sell personal information.",
   },
 ];
+const faqData = {
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
 ---
 
 <Base
-  title="Support"
+  title="Support & FAQ"
+  jsonLd={faqData}
   description="Frequently asked questions about Repose, including how to cancel your subscription, plus how to get in touch."
 >
   <section class="mx-auto max-w-3xl px-6 py-20 sm:py-28">

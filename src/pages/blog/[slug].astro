@@ -13,10 +13,28 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
+const postUrl = new URL(`/blog/${post.id}/`, Astro.site ?? "https://reposesleep.net").href;
+const blogPosting = {
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString().slice(0, 10),
+  url: postUrl,
+  mainEntityOfPage: postUrl,
+  image: new URL("/og-image.jpg", Astro.site ?? "https://reposesleep.net").href,
+  keywords: post.data.tags.join(", "),
+  author: { "@type": "Organization", name: "Solace Studios", url: "https://reposesleep.net/about/" },
+  publisher: { "@type": "Organization", name: "Solace Studios", logo: { "@type": "ImageObject", url: "https://reposesleep.net/icon-192.png" } },
+};
+
 const dateFormatter = new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
 ---
 
-<Base title={post.data.title} description={post.data.description}>
+<Base
+  title={post.data.seoTitle ?? post.data.title}
+  description={post.data.seoDescription ?? post.data.description}
+  jsonLd={blogPosting}
+>
   <article class="mx-auto max-w-3xl px-6 py-20 sm:py-28">
     <header class="reveal mb-12">
       <a href="/blog" class="text-sm font-bold text-repose-muted transition hover:text-repose-text">← Blog</a>
