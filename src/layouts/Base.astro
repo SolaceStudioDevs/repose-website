@@ -25,6 +25,8 @@ const { title, description, image, jsonLd } = Astro.props;
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- Safari on iPhone shows a banner with a Get button for the app. -->
+    <meta name="apple-itunes-app" content="app-id=6762325488" />
     <SEO title={title} description={description} image={image} jsonLd={jsonLd} />
 
     <script is:inline>
